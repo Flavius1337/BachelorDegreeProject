@@ -1,0 +1,68 @@
+﻿@model Album
+
+@{
+    ViewData["Title"] = "Detaliile albumului";
+}
+
+<div class="row">
+    <div class="col-md-8 offset-2">
+        <div class="card mb-12">
+            <div class="row g-0">
+                <div class="col-md-12">
+                    <div class="card-header text-white bg-info">
+                        <p class="card-text">
+                            <h5 class="card-title">
+                                @Model.NumeAlbum
+                            </h5>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <img src="@Model.CopertaAlbum" width="100%" alt="@Model.NumeAlbum">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <p class="card-text">
+                            <b>Producator: </b>
+                            <a asp-controller="Producatori" asp-action="Details" asp-route-id="@Model.ProducatorId">
+                                @Model.Producator.NumeProducator
+                            </a>
+                        </p>
+                        <p class="card-text"><b>Genul Muzical: </b>@Model.GenMuzical</p>
+                        <p class="card-text"><b>Durata Album: </b>@Model.DurataAlbum</p>
+                       
+
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="card-footer">
+                        <p class="card-text">
+                            <b>Artisti: </b>
+                            <hr />
+                            <div class="row">
+                                @foreach (var artist in Model.Artisti_Albume)
+                                {
+                                    <div class="column text-center">
+                                        <img class="border-info rounded-circle" src="@artist.Artist.ProfilePictureURL" style="max-width: 150px" />
+                                        <br />
+                                        <a asp-controller="Artisti" asp-action="Details" asp-route-id="@artist.ArtistId">@artist.Artist.NumeArtist</a>
+                                    </div>
+                                }
+                            </div>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="card-footer">
+                        <p class="card-text">
+                            <a class="btn btn-outline-primary float-right" asp-action="Index">
+                                Inapoi la lista
+                            </a>
+                            <a class="btn btn-success text-white" asp-controller="Orders" asp-action="AddItemToShoppingCart" asp-route-id="@Model.Id"><i class="bi bi-cart-plus"></i> Add to Cart (Pret @Model.Pret.ToString("lei"))</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

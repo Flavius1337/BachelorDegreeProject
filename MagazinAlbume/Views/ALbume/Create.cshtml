@@ -1,0 +1,87 @@
+﻿@using MagazinAlbume.Data.ViewModels
+@using MagazinAlbume.Data.Enum
+@model CreareAlbumVm
+@{
+    ViewData["Title"] = "Creaza un nou album";
+}
+
+<div class="row">
+    <div class="col-md-8 offset-2">
+        <p>
+            <h4>Creaza un album nou</h4>
+        </p>
+
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="NumeAlbum" class="control-label"></label>
+                                <input asp-for="NumeAlbum" class="form-control" />
+                                <span asp-validation-for="NumeAlbum" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="DurataAlbum" class="control-label"></label>
+                                <input asp-for="DurataAlbum" type="text" class="form-control" />
+                                <span asp-validation-for="DurataAlbum" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Pret" class="control-label"></label>
+                                <input asp-for="Pret" type="number" class="form-control" />
+                                <span asp-validation-for="Pret" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="CopertaAlbum" class="control-label"></label>
+                                <input asp-for="CopertaAlbum" class="form-control" />
+                                <span asp-validation-for="CopertaAlbum" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="GenMuzical" class="control-label"></label>
+                                <select asp-for="GenMuzical" class="form-control" asp-items="Html.GetEnumSelectList<GenMuzical>()"></select>
+                                <span asp-validation-for="GenMuzical" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="ProducatorId" class="control-label"></label>
+                                <select asp-for="ProducatorId" class="form-control" asp-items="ViewBag.Producatori"></select>
+                                <span asp-validation-for="ProducatorId" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="ArtistIds" class="control-label"></label>
+                                <select asp-for="ArtistIds" class="form-control" asp-items="ViewBag.Artisti" multiple></select>
+                                <span asp-validation-for="ArtistIds" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 offset-4 text-center">
+                        <img width="100%" id="CopertaAlbumPreview" />
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-outline-success float-right" />
+                        <a class="btn btn-outline-secondary" asp-action="Index">Arata toate albumele</a>
+                    </div>
+                </form>
+
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts{ 
+    <script>
+        $("#CopertaAlbum").on("change", function () {
+            var output = document.getElementById("CopertaAlbumPreview");
+            output.src = $(this).val();
+        })
+    </script>
+}
