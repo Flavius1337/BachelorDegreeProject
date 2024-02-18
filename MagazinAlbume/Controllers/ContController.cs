@@ -40,8 +40,8 @@ namespace MagazinAlbume.Controllers
                 var passwordCheck = await _userManager.CheckPasswordAsync(user, loginVM.Password);
                 if (passwordCheck)
                 {
-                    var result = await _signInManager.PasswordSignInAsync(user, loginVM.Password, false, false);
-                    if (result.Succeeded)
+                    var rezultat = await _signInManager.PasswordSignInAsync(user, loginVM.Password, false, false);
+                    if (rezultat.Succeeded)
                     {
                         return RedirectToAction("Index", "Albume");
                     }
@@ -63,7 +63,7 @@ namespace MagazinAlbume.Controllers
             var user = await _userManager.FindByEmailAsync(registerVM.EmailAddress);
             if (user != null)
             {
-                TempData["Error"] = "This email address is already in use";
+                TempData["Error"] = "Adresa de email este deja folosita";
                 return View(registerVM);
             }
 

@@ -54,7 +54,7 @@ namespace MagazinAlbume.Migrations
 
                     b.HasIndex("ProducatorId");
 
-                    b.ToTable("Albume");
+                    b.ToTable("Albume", (string)null);
                 });
 
             modelBuilder.Entity("MagazinAlbume.Models.Artist", b =>
@@ -79,7 +79,7 @@ namespace MagazinAlbume.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Artisti");
+                    b.ToTable("Artisti", (string)null);
                 });
 
             modelBuilder.Entity("MagazinAlbume.Models.Artist_Album", b =>
@@ -94,7 +94,7 @@ namespace MagazinAlbume.Migrations
 
                     b.HasIndex("AlbumId");
 
-                    b.ToTable("Artisti_Albume");
+                    b.ToTable("Artisti_Albume", (string)null);
                 });
 
             modelBuilder.Entity("MagazinAlbume.Models.Order", b =>
@@ -115,7 +115,7 @@ namespace MagazinAlbume.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Orders", (string)null);
                 });
 
             modelBuilder.Entity("MagazinAlbume.Models.OrderItem", b =>
@@ -144,7 +144,7 @@ namespace MagazinAlbume.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.ToTable("OrderItems");
+                    b.ToTable("OrderItems", (string)null);
                 });
 
             modelBuilder.Entity("MagazinAlbume.Models.Producator", b =>
@@ -169,7 +169,7 @@ namespace MagazinAlbume.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Producatori");
+                    b.ToTable("Producatori", (string)null);
                 });
 
             modelBuilder.Entity("MagazinAlbume.Models.ShoppingCartItem", b =>
@@ -194,7 +194,7 @@ namespace MagazinAlbume.Migrations
 
                     b.HasIndex("AlbumId");
 
-                    b.ToTable("ShoppingCartItems");
+                    b.ToTable("ShoppingCartItems", (string)null);
                 });
 
             modelBuilder.Entity("MagazinAlbume.Models.User", b =>

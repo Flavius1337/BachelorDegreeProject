@@ -1,21 +1,25 @@
 ﻿@model List<Order>
+@using System.Globalization
+@{
+    CultureInfo.CurrentCulture = new CultureInfo("ro-RO");
+}
 
 @{
-    ViewData["Title"] = "All orders";
+    ViewData["Title"] = "Toate comenziile";
 }
 
 <div class="row">
     <div class="col-md-8 offset-2">
         <p>
-            <h4>List of all your orders</h4>
+            <h4>Lista comenzilor</h4>
         </p>
 
         <table class="table">
             <thead>
                 <tr>
-                    <th>Order ID</th>
-                    <th>Items</th>
-                    <th>Total</th>
+                    <th>Id comanda</th>
+                    <th>Albume</th>
+                    <th>Totalul</th>
                     @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
                     {
                         <th>User</th>
@@ -33,7 +37,7 @@
                                 {
                                     <li>
                                         <div class="alert alert-info" role="alert">
-                                            <span class="badge bg-success">@item.Cantitate</span> [@item.Pret.ToString("c")] - @item.Album.NumeAlbum;
+                                            <span class="badge bg-success">@item.Cantitate</span> [@item.Pret.ToString("C")] - @item.Album.NumeAlbum;
                                         </div>
                                     </li>
                                 }

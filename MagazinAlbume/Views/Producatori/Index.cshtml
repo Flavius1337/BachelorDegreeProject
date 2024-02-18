@@ -4,12 +4,46 @@
     ViewData["Title"] = "Lista producatoriilor";
 }
 
+<style>
+    .biografie-stil {
+        max-width: 300px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: normal;
+    }
+
+    .cerc-producator {
+        max-width: 120px; 
+        max-height: 120px;
+        width: 120%; 
+        height: auto;
+        border-radius: 50%; 
+        object-fit: cover; 
+    }
+
+    .fixed-aspect-ratio {
+        position: relative;
+        width: 100%;
+        padding-top: 100%; 
+    }
+
+        .fixed-aspect-ratio img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%; /* Pentru a menține forma rotundă */
+            object-fit: cover; /* Asigură că imaginea este acoperită în întregime în cercuri */
+        }
+</style>
+
 <div class="row">
     <div class="col-md-8 offset-md-2">
 
         <table class="table">
             <thead>
-                <tr class="text-center">
+                <tr class="align-middle">
                     <th>@Html.DisplayNameFor(model => model.ProfilePictureURL)</th>
                     <th>@Html.DisplayNameFor(model => model.NumeProducator)</th>
                     <th>@Html.DisplayNameFor(model => model.Biografie)</th>
@@ -24,12 +58,14 @@
                 {
                     <tr>
                         <td class="align-middle">
-                            <img class="rounded-circle" src="@item.ProfilePictureURL" alt="@item.NumeProducator" style="max-width: 150px" />
+                            <div class="fixed-aspect-ratio">
+                                <img class="rounded-circle cerc-producator" src="@item.ProfilePictureURL" alt="@item.NumeProducator" />
+                            </div>
                         </td>
                         <td class="align-middle">
                             @Html.DisplayFor(modelItem => item.NumeProducator)
                         </td>
-                        <td class="align-middle">
+                        <td class="align-middle biografie-stil">
                             @Html.DisplayFor(modelItem => item.Biografie)
                         </td>
                         @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))

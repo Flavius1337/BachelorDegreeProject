@@ -4,12 +4,38 @@
     ViewData["Title"] = "Lista artistilor";
 }
 
+<style>
+    .biografie-stil {
+        max-width: 300px; 
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: normal;
+    }
+
+   
+    .fixed-aspect-ratio {
+        position: relative;
+        width: 100%;
+        padding-top: 100%; 
+    }
+
+        .fixed-aspect-ratio img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%; 
+            object-fit: cover; 
+        }
+</style>
+
 <div class="row">
     <div class="col-md-8 offset-md-2">
 
         <table class="table">
             <thead>
-                <tr class="text-center">
+                <tr class="align-middle">
                     <th>@Html.DisplayNameFor(model => model.ProfilePictureURL)</th>
                     <th>@Html.DisplayNameFor(model => model.NumeArtist)</th>
                     <th>@Html.DisplayNameFor(model => model.Biografie)</th>
@@ -24,12 +50,14 @@
                 {
                     <tr>
                         <td class="align-middle">
-                            <img class="rounded-circle" src="@item.ProfilePictureURL" alt="@item.NumeArtist" style="max-width: 150px" />
+                            <div class="fixed-aspect-ratio">
+                                <img class="rounded-circle" src="@item.ProfilePictureURL" alt="@item.NumeArtist" />
+                            </div>
                         </td>
                         <td class="align-middle">
                             @Html.DisplayFor(modelItem => item.NumeArtist)
                         </td>
-                        <td class="align-middle">
+                        <td class="align-middle biografie-stil">
                             @Html.DisplayFor(modelItem => item.Biografie)
                         </td>
                         @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
@@ -40,7 +68,7 @@
                                 <a class="btn btn-danger text-white" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash"></i>Delete </a>
                             </td>
                         }
-                        
+
                     </tr>
                 }
             </tbody>

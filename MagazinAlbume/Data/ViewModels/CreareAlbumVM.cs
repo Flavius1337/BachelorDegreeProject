@@ -17,7 +17,6 @@ namespace MagazinAlbume.Data.ViewModels
         [Required(ErrorMessage = "Pretul este necesar!")]
         public double? Pret { get; set; }
 
-
         [Display(Name = "Coperta albumului:")]
         [Required(ErrorMessage = "Poza pentru coperta albumului este necesara!")]
         public string CopertaAlbum { get; set; }
@@ -26,7 +25,7 @@ namespace MagazinAlbume.Data.ViewModels
         [Display(Name = "Selectaza o categorie muzicala")]
         [Required(ErrorMessage = "Categoria muzicala este necesara!")]
         public GenMuzical GenMuzical { get; set; }
-        [Display(Name = "Durata albumului: (este necesara utilizarae formatului ore:minute:secunde ")]
+        [Display(Name = "Durata albumului: (este necesara utilizarea formatului ore:minute:secunde ")]
         [Required(ErrorMessage = "Durata albumului este necesara!")]
         public TimeSpan DurataAlbum { get; set; }
 

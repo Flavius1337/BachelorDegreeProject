@@ -31,17 +31,21 @@ namespace MagazinAlbume.Controllers
 
             if (!string.IsNullOrEmpty(searchString))
             {
+                var filteredResult = allAlbums.Where(n =>
+                    n.NumeAlbum.ToLower().Contains(searchString.ToLower()) ||
+                    n.GenMuzical.ToString().ToLower() == searchString.ToLower()
+                ).ToList();
 
-                var filteredResult = allAlbums.Where(n => n.NumeAlbum.ToLower().Contains(searchString.ToLower())).ToList();         
                 return View("Index", filteredResult);
             }
 
             return View("Index", allAlbums);
         }
 
+
         [AllowAnonymous]
 
-        //GET: Movies/Details/1
+        //GET: Albume/Details/1
         public async Task<IActionResult> Details(int id)
         {
             var albumDetails = await _service.GetAlbumByIdAsync(id);
@@ -74,7 +78,7 @@ namespace MagazinAlbume.Controllers
 
         }
 
-            //GET: Movies/Edit/1
+            //GET: Albume/Edit/1
             public async Task<IActionResult> Edit(int id)
             {
                 var albumDetails = await _service.GetAlbumByIdAsync(id);
@@ -117,5 +121,24 @@ namespace MagazinAlbume.Controllers
                 await _service.UpdateAlbumAsync(album);
                 return RedirectToAction(nameof(Index));
             }
+
+
+        //Get: Albume/Delete
+        public async Task<IActionResult> Delete(int id)
+        {
+            var albumDetails = await _service.GetByIdAsync(id);
+            if (albumDetails == null) return View("NotFound");
+            return View(albumDetails);
         }
+
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var albumDetails = await _service.GetByIdAsync(id);
+            if (albumDetails == null) return View("NotFound");
+
+            await _service.DeleteAsync(id);
+            return RedirectToAction(nameof(Index));
+        }
+    }
     }

@@ -5,8 +5,8 @@ namespace MagazinAlbume.Data.ViewModels
 {
     public class LoginVM
     {
-        [Display(Name = "Email address")]
-        [Required(ErrorMessage = "Email address is required")]
+        [Display(Name = "Adresa de email")]
+        [Required(ErrorMessage = "Adresa de email este obligatorie!")]
         public string EmailAddress { get; set; }
 
         [Required]

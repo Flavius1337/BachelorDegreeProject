@@ -1,14 +1,18 @@
 ﻿@using MagazinAlbume.Data.ViewModels;
+@using System.Globalization
+@{
+    CultureInfo.CurrentCulture = new CultureInfo("ro-RO");
+}
 @model ShoppingCartVM
 @{
-    ViewData["Title"] = "Shopping cart summary";
+    ViewData["Title"] = "Lista articolelor adaugate in cos";
 }
 
 
 <div class="row">
     <div class="col-md-8 offset-2">
         <div class="text-center">
-            <h2>You shopping cart summary</h2>
+            <h2>Cosul tau de cumparaturi:</h2>
         </div>
 
         <table class="table">
@@ -57,13 +61,10 @@
 
         <div class="text-center">
             <div class="btn-group">
-               @* <a class="btn btn-outline-primary" asp-action="CompleteOrder">
-                    Complete order
-                </a> *@
                 <div id="paypal-btn"></div>
                 <span style="padding:5px"></span>
                 <a class="btn btn-outline-success" asp-controller="Albume" asp-action="Index">
-                    Add more items
+                    Adauga mai multe albume
                 </a>
             </div>
         </div>
@@ -81,12 +82,12 @@
         let _total = @Html.Raw(Model.ShoppingCartTotal);
 
         paypal.Button.render({
-            //Configure environment
+            //Configurare paypal
             env: 'sandbox',
             client: {
                 sandbox: 'AQnoirqC0BgFN9v8vsSv0K_IbVK7FzYFYjuJTeBupdFMrnREAw4rfik-_sBWT09epLFbBf7mw0liSuJ9'
             },
-            //Customize button
+            //Modificare buton paypal
             locale: 'en_US',
             style: {
                 size: 'small',
@@ -94,7 +95,7 @@
                 shape: 'pill'
             },
             commit: true,
-            //Set up a payment
+            //Pregateste plata
             payment: function (data, actions) {
                 return actions.payment.create({
                     transactions: [{
@@ -105,7 +106,7 @@
                     }]
                 });
             },
-            //Execute the payment
+            //Executa plata
             onAuthorize: function (data, actions) {
                 return actions.payment.execute().then(function () {
                     var url = '@Url.Action("CompleteOrder", "Orders", new { })';

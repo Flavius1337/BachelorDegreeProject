@@ -5,18 +5,19 @@ namespace MagazinAlbume.Data.ViewModels
 {
     public class RegisterVM
     {
-        [Display(Name = "Full name")]
+        [Display(Name = "Numele tau")]
         [Required(ErrorMessage = "Numele este obligatoriu!")]
         public string NumeUtilizator { get; set; }
 
-        [Display(Name = "Email address")]
+        [Display(Name = "Adresa de email")]
         [Required(ErrorMessage = "Adresa de email este obligatorie!")]
         public string EmailAddress { get; set; }
 
+        [Display(Name = "Parola")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        [Display(Name = "Confirm password")]
+        [Display(Name = "Confirma parola")]
         [Required(ErrorMessage = "Parola este obligatorie!")]
         [DataType(DataType.Password)]
         [Compare("Password", ErrorMessage = "Parolele nu se potrivesc!")]

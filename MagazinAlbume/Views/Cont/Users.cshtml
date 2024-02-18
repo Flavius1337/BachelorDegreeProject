@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<User>
 
 @{
-    ViewData["Title"] = "Lista tuturor utilizatoriilor";
+    ViewData["Title"] = "Lista tuturor utilizatorilor";
 }
 
 <div class="row">
@@ -12,10 +12,9 @@
 
         <table class="table">
             <thead>
-                <tr class="text-center">
-                    <th>@Html.DisplayNameFor(model => model.NumeUtilizator)</th>
-                    <th>@Html.DisplayNameFor(model => model.UserName)</th>
-                    <th>@Html.DisplayNameFor(model => model.Email)</th>
+                <tr class="align-middle">
+                    <th>Numele utilizatorului</th>
+                    <th>Adresa de Email</th>
                 </tr>
             </thead>
             <tbody>
@@ -24,9 +23,6 @@
                     <tr>
                         <td class="align-middle">
                             @Html.DisplayFor(modelItem => item.NumeUtilizator)
-                        </td>
-                        <td class="align-middle">
-                            @Html.DisplayFor(modelItem => item.UserName)
                         </td>
                         <td class="align-middle">
                             @Html.DisplayFor(modelItem => item.Email)

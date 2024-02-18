@@ -1,15 +1,41 @@
-﻿@model Album
+﻿@using System.Globalization
+@model Album
 
 @{
     ViewData["Title"] = "Detaliile albumului";
 }
+<style>
+    body {
+        background-color: #C0C0C0;
+        
+    }
+
+    .cerc-artisti {
+        width: 100px; 
+        height: 100px;
+        border-radius: 50%; 
+        object-fit: cover; 
+    }
+
+    .artist-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .artist-detalii {
+        margin-top: 8px; 
+        text-align: center;
+    }
+</style>
+
 
 <div class="row">
     <div class="col-md-8 offset-2">
         <div class="card mb-12">
             <div class="row g-0">
                 <div class="col-md-12">
-                    <div class="card-header text-white bg-info">
+                    <div class="card-header text-white" style="background-color: #800080;">
                         <p class="card-text">
                             <h5 class="card-title">
                                 @Model.NumeAlbum
@@ -42,26 +68,44 @@
                             <div class="row">
                                 @foreach (var artist in Model.Artisti_Albume)
                                 {
-                                    <div class="column text-center">
-                                        <img class="border-info rounded-circle" src="@artist.Artist.ProfilePictureURL" style="max-width: 150px" />
-                                        <br />
-                                        <a asp-controller="Artisti" asp-action="Details" asp-route-id="@artist.ArtistId">@artist.Artist.NumeArtist</a>
+                                    <div class="col-md-3 mb-3">
+                                        <div class="artist-container">
+                                            <img class="border-info cerc-artisti" src="@artist.Artist.ProfilePictureURL" >
+                                        <div class="artist-detalii">
+                                            <a asp-controller="Artisti" asp-action="Details" asp-route-id="@artist.ArtistId">@artist.Artist.NumeArtist</a>
+                                        </div>
+                                    </div>
                                     </div>
                                 }
                             </div>
                         </p>
                     </div>
                 </div>
+
+
                 <div class="col-md-12">
-                    <div class="card-footer">
+                    <div class="card-footer d-flex justify-content-between">
                         <p class="card-text">
-                            <a class="btn btn-outline-primary float-right" asp-action="Index">
-                                Inapoi la lista
+                            <a class="btn btn-outline-primary" asp-action="Index">Inapoi la lista</a>
+                            <a class="btn btn-success text-white" asp-controller="Orders" asp-action="AddItemToShoppingCart" asp-route-id="@Model.Id">
+                                <i class="bi bi-cart-plus"></i> Adauga in cos (Pret @Model.Pret.ToString("C2", CultureInfo.CreateSpecificCulture("ro-RO")))
                             </a>
-                            <a class="btn btn-success text-white" asp-controller="Orders" asp-action="AddItemToShoppingCart" asp-route-id="@Model.Id"><i class="bi bi-cart-plus"></i> Add to Cart (Pret @Model.Pret.ToString("lei"))</a>
+                        </p>
+                        <p>
+                            @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                            {
+                                <form asp-action="Delete" asp-route-id="@Model.Id" method="post">
+                                    <button type="submit" class="btn btn-danger text-white ml-auto" onclick="return confirm('Sunteți sigur că doriți să ștergeți acest album?')">
+                                        <i class="bi bi-trash"></i>Delete
+                                    </button>
+                                </form>
+                            }
                         </p>
                     </div>
                 </div>
+
+
+
             </div>
         </div>
     </div>

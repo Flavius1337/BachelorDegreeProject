@@ -29,14 +29,9 @@ namespace MagazinAlbume.Data
                            NumeArtist = "Michael Jackson",
                            ProfilePictureURL = "https://yt3.googleusercontent.com/drQOo1IcB7X_gA54Wdi4QHd1PBDbL3sD__6c_-PcFEccFzjeH0o4qYDdVvSa3GEuDFAQd95r1Q=s176-c-k-c0x00ffffff-no-rj",
                            Biografie = "Legenda muzicii pop"
-                        },
-
-                        new Artist()
-                        {
-                           NumeArtist = "Test",
-                           ProfilePictureURL = "https://yt3.googleusercontent.com/drQOo1IcB7X_gA54Wdi4QHd1PBDbL3sD__6c_-PcFEccFzjeH0o4qYDdVvSa3GEuDFAQd95r1Q=s176-c-k-c0x00ffffff-no-rj",
-                           Biografie = "Artist"
                         }
+
+                       
                      });
                     context.SaveChanges();
                 }
@@ -78,7 +73,7 @@ namespace MagazinAlbume.Data
             }); ;
                     context.SaveChanges();
                 }
-                //Actors & Movies
+                //Artist & Album
                 if (!context.Artisti_Albume.Any())
                 {
                     context.Artisti_Albume.AddRange(new List<Artist_Album>()
@@ -86,7 +81,7 @@ namespace MagazinAlbume.Data
                 new Artist_Album()
                 {
                     ArtistId = 1,
-                    AlbumId = 1
+                    AlbumId = 7
                 }
                     });
                     context.SaveChanges();
@@ -99,15 +94,15 @@ namespace MagazinAlbume.Data
             using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
             {
 
-                //Roles
-                var roleManager = serviceScope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+                //Roluri
+                var rolManager = serviceScope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-                if (!await roleManager.RoleExistsAsync(UserRoles.Admin))
-                    await roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
-                if (!await roleManager.RoleExistsAsync(UserRoles.User))
-                    await roleManager.CreateAsync(new IdentityRole(UserRoles.User));
+                if (!await rolManager.RoleExistsAsync(UserRoles.Admin))
+                    await rolManager.CreateAsync(new IdentityRole(UserRoles.Admin));
+                if (!await rolManager.RoleExistsAsync(UserRoles.User))
+                    await rolManager.CreateAsync(new IdentityRole(UserRoles.User));
 
-                //Users
+                //Useri
                 var userManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<User>>();
                 string adminUserEmail = "admin@magazinalbume.com";
 
@@ -116,8 +111,8 @@ namespace MagazinAlbume.Data
                 {
                     var newAdminUser = new User()
                     {
-                        NumeUtilizator = "Admin User",
-                        UserName = "admin-user",
+                        NumeUtilizator = "Admin",
+                        UserName = "Admin",
                         Email = adminUserEmail,
                         EmailConfirmed = true
                     };
@@ -133,7 +128,7 @@ namespace MagazinAlbume.Data
                 {
                     var newAppUser = new User()
                     {
-                        NumeUtilizator = "Application User",
+                        NumeUtilizator = "Utilizator aplicatie",
                         UserName = "app-user",
                         Email = appUserEmail,
                         EmailConfirmed = true

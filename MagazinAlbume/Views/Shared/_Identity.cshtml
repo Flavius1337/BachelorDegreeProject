@@ -15,28 +15,30 @@
 }
 else {
 
-@*User profile section*@
+@*Profilul utilizatorului*@
+
     <div class="dropdown">
-        <button class="btn btn-outline-success dropdown-toggle" type="button" id="profile-btn" data-toggle="dropdown"
+        <button class="btn btn-outline-success dropdown-toggle" type="button" id="profile-btn" data-bs-toggle="dropdown"
             aria-expanded="false">
-            <i class="bi bi-person-badge"></i> Hello @UserManager.GetUserName(User)
+            <i class="bi bi-person-badge"></i> Salut, @UserManager.GetUserName(User)
         </button>
         <ul class="dropdown-menu" aria-labelledby="profile-btn">
             <li>
                 <a class="dropdown-item" asp-controller="Orders" asp-action="Index">
-                    <i class="bi bi-list"></i> Orders
+                    <i class="bi bi-list"></i> Lista comenzi
                 </a>
             </li>
-            @if(User.IsInRole("Admin")){
+            @if (User.IsInRole("Admin"))
+            {
                 <li>
                     <a class="dropdown-item" asp-controller="Cont" asp-action="Users">
-                        <i class="bi bi-people"></i> Users
+                        <i class="bi bi-people"></i> Utilizatori
                     </a>
                 </li>
-
             }
         </ul>
     </div>
+
     <span style="padding: 5px;"></span>
     <form asp-controller="Cont" asp-action="Logout">
         <button class="btn btn-outline-danger my-2 my-sm-0">

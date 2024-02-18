@@ -14,27 +14,27 @@
                 <form asp-action="Create">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-                    <div class="form-group text-center">
+                    <div class="form-group text-center" style="margin-bottom: 10px">
                         <img id="ProfilePicturePreview" class="border-info rounded-circle" style="max-width: 150px" />
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" style="margin-bottom: 10px">
                         <label asp-for="ProfilePictureURL" class="control-label"></label>
                         <input asp-for="ProfilePictureURL" class="form-control" />
                         <span asp-validation-for="ProfilePictureURL" class="text-danger"></span>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" style="margin-bottom: 10px">
                         <label asp-for="NumeProducator" class="control-label"></label>
                         <input asp-for="NumeProducator" class="form-control" />
                         <span asp-validation-for="NumeProducator" class="text-danger"></span>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" style="margin-bottom: 20px">
                         <label asp-for="Biografie" class="control-label"></label>
                         <input asp-for="Biografie" class="form-control" />
                         <span asp-validation-for="Biografie" class="text-danger"></span>
                     </div>
 
-                    <div class="form-group">
-                        <input type="submit" value="Creaza" class="btn btn-outline-success float-right" />
+                    <div class="form-group" >
+                        <input type="submit" value="Creaza" class="btn btn-outline-success float-right" style="margin-right: 5px">
                         <a class="btn btn-outline-secondary" asp-action="Index">Arata toti producatorii</a>
                     </div>
                 </form>
